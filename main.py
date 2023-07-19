@@ -1,16 +1,17 @@
 from flask import Flask, render_template, request, redirect
 import requests
 import smtplib
+import os
 from pprint import pprint
 
 #_____________________________________________Constants______________________________________________________#
 
-BLOGS_API = 'https://api.npoint.io/802720ad4cf9deb722b0'
+BLOGS_API = os.environ['BLOG_ENDPOINT']
 response = requests.get(BLOGS_API)
 blog_posts = response.json()
 
-MY_EMAIL = 'keirandevinetest@gmail.com'
-MY_PASSWORD = 'xqtkxyhvmfisjqfi'
+MY_EMAIL = os.environ['MY_EMAIL']
+MY_PASSWORD = os.environ['MY_PASSWORD']
 
 app = Flask(__name__)
 
