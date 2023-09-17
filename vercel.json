@@ -1,1 +1,12 @@
-{ "rewrites": [{ "source": "/(.*)", "destination": "/" }] }
+{
+  "routes": [
+    {
+      "src": "/",
+      "dest": "/"
+    },
+    {
+      "src": "https://my-portfolio-phi-two-78.vercel.app/",
+      "dest": "/"
+    }
+  ]
+}
