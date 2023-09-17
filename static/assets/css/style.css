@@ -148,7 +148,7 @@ p {
 
 .paddsections {
   padding-top: 90px;
-  padding-bottom: 90px !important;
+  padding-bottom: 90px !important
 }
 
 .hvr-shutter-in-horizontal::before {
@@ -177,7 +177,7 @@ p {
   right: 15px;
   bottom: 15px;
   z-index: 996;
-  background: #b8a07e;
+  background: #999;
   width: 40px;
   height: 40px;
   border-radius: 4px;
@@ -191,7 +191,7 @@ p {
 }
 
 .back-to-top:hover {
-  background: #c6b398;
+  background: #212529;
   color: #fff;
 }
 
@@ -691,7 +691,7 @@ p {
 
 #portfolio #portfolio-flters li:hover,
 #portfolio #portfolio-flters li.filter-active {
-  color: #b8a07e;
+  color: #212529;
 }
 
 #portfolio #portfolio-flters li:last-child {
@@ -886,10 +886,7 @@ p {
 /*--------------------------------------------------------------
 # Journal
 --------------------------------------------------------------*/
-#contact {
-  height: auto;
-  width: 100%;
-}
+
 
 .contact-details {
   list-style: none;
@@ -1406,6 +1403,12 @@ blockquote {
   .contact-contact {
     margin-bottom: 30px;
   }
+
+  #contact {
+  height: auto;
+  width: 100%;
+  margin-top: 40px;
+}
 
   /* Footer */
   #footer .socials-media ul li {
