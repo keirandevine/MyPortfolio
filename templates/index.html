@@ -1,8 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-{% include "header.html" %}
 
+
+{% block navbar %}
+<!-- ======= Header ======= -->
+  <header id="header" class="fixed-top header-homepage">
+    <div class="container d-flex align-items-center justify-content-between">
+
+<!--      <a href="index.html" class="logo"><img src="#" alt="" class="img-fluid"></a>-->
+      <!-- Uncomment below if you prefer to use an text logo -->
+       <h1 class="logo"><a href="{{ url_for('home') }}">KD</a></h1>
+
+      <nav id="navbar" class="navbar header-homepage">
+        <ul>
+          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="#about">About</a></li>
+          <li><a class="nav-link  scrollto" href="#portfolio">Portfolio</a></li>
+          <li><a class="nav-link  scrollto" href="#journal">Blog</a></li>
+          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+{% endblock %}
+
+
+{% block content %}
 <body>
   <!-- ======= Hero Section ======= -->
   <div id="hero" class="home">
@@ -31,7 +57,7 @@
           <div class="col-lg-4">
             <div class="div-img-bg">
               <div class="about-img">
-                <img src="static/assets/img/me.jpg" class="img-responsive" alt="me">
+                <img src="static/assets/img/close up.png" class="img-responsive" alt="me">
               </div>
             </div>
           </div>
@@ -39,10 +65,11 @@
           <div class="col-lg-6">
             <div class="about-descr">
 
-              <p class="p-heading">In a Nutshell </p>
-              <p class="separator">Since starting to study computer science in January 2023, my skills have been going from strength to strength. After
+              <h1 class="p-heading">In a Nutshell </h1>
+              <br>
+              <h5 class="separator">Since starting to study computer science in January 2023, my skills have been going from strength to strength. After
               starting out with text based apps, I quickly moved on to learn about other areas, like GUIs, Web development, Web scraping, APIs,
-              user authentication among many more. In 2024, I will graduate top of my class and get accepted to do a level 8 certificate in software development.
+                user authentication among many more. In 2024, I will graduate top of my class and get accepted to do a level 8 certificate in software development.</h5>
             </div>
 
 
@@ -130,75 +157,32 @@
             <ul id="portfolio-flters">
               <li data-filter="*" class="filter-active">All</li>
               <li data-filter=".filter-app">App</li>
-              <li data-filter=".filter-card">Card</li>
+              <li data-filter=".filter-game">Game</li>
               <li data-filter=".filter-web">Web</li>
             </ul>
           </div>
         </div>
 
-        <div class="row portfolio-container">
+      <div class="row portfolio-container">
+       {% for project in projects %}
+      <div class="col-md-4 portfolio-item filter-{{project.category.lower()}}" >
+        <div class="card">
+  <img src="{{project.img_url}}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{project.name}}</h5>
+    <p class="card-text">{{project.description}}</p>
+    <a href="{{project.git_url}}" class="btn btn-primary embedded-btn">GitHub</a>
+  </div>
+</div>
+      </div>
 
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <img src="static/assets/img/morse_img.png" class="img-fluid" alt="morse code converter window">
-            <div class="portfolio-info">
-              <h4>App - Morse Code Converter</h4>
-              <p>Type in a text and have it converted instantly into morse code</p>
-              <a href="static/assets/img/morse_img.png" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Morse Code Converter"><i class="bx bx-plus"></i></a>
-              <a href="https://github.com/keirandevine/MorseCodeConverter" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-            </div>
-          </div>
+      {% endfor %}
 
-          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-            <img src="static/assets/img/portfolio/portfolio-2.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>Web 3</h4>
-              <p>Web</p>
-              <a href="static/assets/img/portfolio/portfolio-2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Web 3"><i class="bx bx-plus"></i></a>
-              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <img src="static/assets/img/portfolio/portfolio-3.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>App 2</h4>
-              <p>App</p>
-              <a href="static/assets/img/portfolio/portfolio-3.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="App 2"><i class="bx bx-plus"></i></a>
-              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-            <img src="static/assets/img/portfolio/portfolio-4.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>Card 2</h4>
-              <p>Card</p>
-              <a href="static/assets/img/portfolio/portfolio-4.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Card 2"><i class="bx bx-plus"></i></a>
-              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-            <img src="static/assets/img/portfolio/portfolio-5.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>Web 2</h4>
-              <p>Web</p>
-              <a href="static/assets/img/portfolio/portfolio-5.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Web 2"><i class="bx bx-plus"></i></a>
-              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <img src="static/assets/img/portfolio/portfolio-6.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>App 3</h4>
-              <p>App</p>
-              <a href="static/assets/img/portfolio/portfolio-6.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="App 3"><i class="bx bx-plus"></i></a>
-              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-            </div>
-          </div>
-
+      </div>
+      <a href="{{url_for('add_new_project')}}" class="btn btn-primary new-blog-btn">Add New Project</a>
         </div>
+
+
 
       </div>
 
@@ -213,63 +197,32 @@
         </div>
       </div>
 
+
       <div class="container">
         <div class="journal-block">
           <div class="row">
+          {% for post in posts %}
+
 
             <div class="col-lg-4 col-md-6">
               <div class="journal-info">
-
-                <a href="{{ url_for('get_post', blog_id=1) }}"><img src="static/assets/img/leap.png" class="img-responsive" alt="img"></a>
-
+                <a href="{{ url_for('get_post', blog_id=post.id) }}"><img src="{{post.img_url}}" class="img-responsive" alt="img"></a>
                 <div class="journal-txt">
-
-                  <h4><a href="{{ url_for('get_post', blog_id=1) }}">The Joy of Taking Leaps</a></h4>
-                  <p class="separator">You can reinvent yourself if you believe this one thing
+                  <h4><a href="{{ url_for('get_post', blog_id=post.id) }}">{{post.title}}</a></h4>
+                  <p class="separator">{{post.subtitle}}
                   </p>
 
                 </div>
-
+                    <a href="{{url_for('delete_blog_post', index=post.id)}}" class="btn btn-primary embedded-btn">Delete</a>
+                    <a class="btn btn-primary embedded-btn float-right" href="{{url_for('edit_post', post_id=post.id)}}" >Edit</a>
               </div>
             </div>
-
-            <div class="col-lg-4 col-md-6">
-              <div class="journal-info">
-
-                <a href="{{ url_for('get_post', blog_id=2) }}"><img src="static/assets/img/discipline.png" class="img-responsive" alt="img"></a>
-
-                <div class="journal-txt">
-
-                  <h4><a href="{{ url_for('get_post', blog_id=2) }}">Show Up and Win</a></h4>
-                  <p class="separator">In the end, it's what you do consistently that defines you
-                  </p>
-
-                </div>
-
-              </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-              <div class="journal-info">
-
-                <a href="{{ url_for('get_post', blog_id=3) }}"><img src="static/assets/img/travel.png" class="img-responsive" alt="img"></a>
-
-                <div class="journal-txt">
-
-                  <h4><a href="{{ url_for('get_post', blog_id=3) }}">Learning from Difference </a></h4>
-                  <p class="separator">How travel expands minds
-                  </p>
-
-                </div>
-
-              </div>
-            </div>
-
+            {% endfor %}
           </div>
         </div>
+        <br>
+        <a href="{{url_for('create_new_post')}}" class="btn btn-primary new-blog-btn">New Blog Post</a>
       </div>
-
-    </div><!-- End Journal Section -->
 
     <!-- ======= Contact Section ======= -->
     <div id="contact" class="paddsection">
@@ -322,7 +275,7 @@
 
 
                   <div class="mt-0">
-                    <input type="submit" class="btn btn-default btn-send" value="Send message">
+                    <input type="submit" class="btn btn-default btn-send" id="contact-btn" value="Send message">
                   </div>
 
                 </div>
@@ -335,7 +288,7 @@
 
   </main><!-- End #main -->
 
-  {% include "footer.html" %}
+  {% endblock %}
 
 
 

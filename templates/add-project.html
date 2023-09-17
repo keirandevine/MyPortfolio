@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+
+
+
+
+{% block content %}
+
+<br>
+<br>
+<div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            {% if id %}
+            <h1>Edit Project</h1>
+            {% else %}
+            <h1>Create New Project</h1>
+            {% endif %}
+            <span class="subheading">Time to share your work with the world!<br><br></span>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <div class="container form-container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+
+          <!-- This is where the form will go -->
+
+          {{ wtf.quick_form(form, button_map={'submit': 'primary'}) }}
+          {{ ckeditor.load() }}
+
+      </div>
+    </div>
+
+  </div>
+
+
+
+
+{% endblock %}
+
+
+
+</body>

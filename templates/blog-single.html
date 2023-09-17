@@ -1,7 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-{% include 'header.html' %}
+{% block content %}
+
+
+
+
 
 <body>
 
@@ -16,18 +19,20 @@
               <div class="container-main single-main">
                 <div class="col-md-12">
                   <div class="block-main mb-30">
-                    <img src="static/assets/img/blog-post-big.jpg" class="img-responsive" alt="reviews2">
+                       <h1 id="post-title">{{ post.title }}</h1>
+                      <br>
+                    <img src="{{post.img_url}}" class="img-responsive" alt="reviews2" width="100%">
                     <div class="content-main single-post padDiv">
-                      <div class="journal-txt">
-                        <h4><a href="#"></a>{{ post.title }}</h4>
-                      </div>
+
+
+
                       <div class="post-meta">
                         <ul class="list-unstyled mb-0">
-                          <li class="author">by: <a href="https://www.linkedin.com/in/keiran-devine-1ba373274/">Keiran Devine</a></li>
+                          <li class="author">by: <a href="https://www.linkedin.com/in/keiran-devine-1ba373274/">{{post.author}}</a></li>
                           <li class="date">date:<a href="#">19/07/2023</a></li>
                         </ul>
                       </div>
-                      <p> {{ post.body }}</p>
+                      <p> {{ post.body|safe }}</p>
                     </div>
                   </div>
 
@@ -43,7 +48,8 @@
 
   </main><!-- End #main -->
 
-  {% include 'footer.html' %}
+
+{% endblock %}
 
 </body>
 
