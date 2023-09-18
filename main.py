@@ -26,6 +26,10 @@ MY_PASSWORD = os.environ['MY_PASSWORD']
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = secrets.token_hex()
+app.template_folder = 'templates'
+app.static_folder = 'static'
+
+
 ckeditor = CKEditor(app)
 bootstrap = Bootstrap(app)
 
