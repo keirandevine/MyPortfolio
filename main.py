@@ -1,12 +1,15 @@
 import secrets
 
+import flask
 from flask import Flask, render_template, request, redirect, url_for
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, SelectField
+from wtforms import StringField, SubmitField, SelectField, PasswordField
 from wtforms.validators import DataRequired, URL
 from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
 from flask_ckeditor import CKEditor, CKEditorField
+from flask_login import UserMixin, login_user, current_user,logout_user, LoginManager
+from werkzeug.security import generate_password_hash, check_password_hash
 import requests
 import smtplib
 import os
@@ -37,12 +40,21 @@ bootstrap = Bootstrap(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///posts.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+login_manager = LoginManager()
+login_manager.init_app(app)
 
 
 
 
 
 #________________________________________Configure DB Tables___________________________________________________#
+
+
+class User(UserMixin, db.Model):
+    __tablename__ = "users"
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(250), nullable=False)
+    password = db.Column(db.String(250), nullable=False)
 
 class BlogPost(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -83,6 +95,11 @@ class AddProjectForm(FlaskForm):
     git_url = StringField("GitHub Link", validators=[DataRequired(), URL()])
     submit = SubmitField("Submit Project")
 
+class LoginForm(FlaskForm):
+    email = StringField("Email", validators=[DataRequired()])
+    password = PasswordField("Password", validators=[DataRequired()])
+    submit = SubmitField("Login")
+
 #_________________________________________Definition of Functions____________________________________________#
 
 def send_email(name, email, subject, message):
@@ -90,8 +107,12 @@ def send_email(name, email, subject, message):
     with smtplib.SMTP('smtp.gmail.com') as connection:
         connection.starttls()
         connection.login(user=MY_EMAIL, password=MY_PASSWORD)
-        connection.sendmail(from_addr=MY_EMAIL, to_addrs=MY_EMAIL, msg=email_message)
+        connection.sendmail(from_addr=MY_EMAIL, to_addrs=email, msg=email_message)
         connection.close()
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
 
 #______________________________________Flask Server Routes___________________________________________________#
@@ -99,7 +120,41 @@ def send_email(name, email, subject, message):
 def home():
     recent_posts = db.session.query(BlogPost).order_by(BlogPost.date.desc()).limit(3).all()
     portfolio_projects = db.session.query(PortfolioItem).all()
+
+    pw = generate_password_hash(
+        "Stan88ley",
+        method='pbkdf2:sha256',
+        salt_length=8
+    )
+    print(pw)
+
+
     return render_template('index.html', posts=recent_posts, projects=portfolio_projects)
+
+@app.route("/login", methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        email = form.email.data
+        password = form.password.data
+
+        user = User.query.filter_by(email=email).first()
+        if not user:
+            flask.flash("That email does not exist. Try again.")
+            return redirect(url_for('login'))
+        elif not check_password_hash(user.password, password):
+            flask.flash("Password incorrect, please try again")
+            return redirect(url_for('login'))
+        else:
+            login_user(user)
+            return redirect(url_for('home'))
+    return render_template('login.html', form=form, current_user=current_user)
+
+@app.route('/logout')
+def logout():
+    """Logs user out and redirects to the home page"""
+    logout_user()
+    return redirect(url_for('home'))
 
 
 @app.route('/blog/<int:blog_id>')
@@ -200,4 +255,4 @@ def get_contact_info():
 
 
 if __name__ == "__main__":
-    app.run(debug=False, port=5000)
+    app.run(debug=True, port=5000)

@@ -10,8 +10,8 @@
 # General
 --------------------------------------------------------------*/
 body {
-  background: #ffffff;
-  color: #898989;
+  background: #F1EFEF;
+  color: #7D7C7C;
   font-family: "Poppins", helvetica;
   font-size: 15px;
   font-weight: 300;
@@ -33,18 +33,19 @@ h6 {
 }
 
 h2 {
-  color: #292929;
+  color: #191717;
   font-weight: 600;
+  font-size: 20px;
 }
 
 h4 {
-  color: #292929;
+  color: #191717;
   font-size: 14px;
   font-weight: 600;
 }
 
 a {
-  color: #292929;
+  color: #191717;
   text-decoration: none !important;
   transition: all 0.5s ease-in-out 0s;
 }
@@ -57,54 +58,59 @@ p {
   margin: 25px 0;
   padding: 0;
   font-size: 15px;
-  color: #0c0c0c;
+  color: #7D7C7C;
   line-height: 28px;
 }
 
 .p-heading separator{
-    color: #999999;
+    color: #7D7C7C;
 
 }
 
 .separator{
-    font-weight: normal
+    font-weight: normal;
+
 }
 
 ::-moz-selection {
-  background: #b8a07e;
-  color: #fff;
+  background: #CCC8AA;
+  color: #F1EFEF;
 }
 
 ::selection {
-  background: #b8a07e;
-  color: #fff;
+  background: #CCC8AA;
+  color: #F1EFEF;
 }
-
 .btn {
-  background: #333;
+  display: inline-block; /* Make the button a flex container */
+  justify-content: center; /* Horizontally center the content */
+  align-items: center; /* Vertically center the content */
+  background: #191717;
   border: medium none;
   border-radius: 0;
-  color: #fff;
-  font-size: 12px;
-  height: 50px;
-  line-height: 50px;
+  color: #F1EFEF;
+  font-size: 10px;
+  height: 30px;
+  line-height: 30px;
   padding: 0 30px;
   text-transform: uppercase;
+  width: 110px;
+
 }
 
 .btn:hover,
 .btn:focus {
-  color: #fff;
-  background: #666;
+  color: #F1EFEF;
+  background: #7D7C7C;
   border: 2px solid;
-  border-color: #333;
+  border-color: #191717;
 
 }
 
 
 .card img{
     max-width: 100%;
-    height: auto;
+    height: 200px;
 }
 
 .padDiv {
@@ -122,10 +128,10 @@ p {
 }
 
 .form-control {
-  background-color: transparent;
-  border: 1px solid #999;
+  background-color: #F1EFEF;
+  border: 1px solid #CCC8AA;
   border-radius: 0;
-  color: #999999;
+  color: #191717;
   font-size: 12px;
   font-weight: 500;
   height: 50px;
@@ -133,13 +139,9 @@ p {
   padding-left: 10px;
   margin: 0 0 25px 0;
   line-height: 14px;
-  text-transform: uppercase;
+
 }
 
-.form-control:focus {
-  box-shadow: none;
-  outline: 0 none;
-}
 
 .paddsection {
   padding-top: 90px;
@@ -152,11 +154,11 @@ p {
 }
 
 .hvr-shutter-in-horizontal::before {
-  background: #333;
+  background: #191717;
 }
 
 .hvr-shutter-in-horizontal:hover {
-  background: #b8a07e;
+  background: #CCC8AA;
 }
 
 .mb-30 {
@@ -177,7 +179,7 @@ p {
   right: 15px;
   bottom: 15px;
   z-index: 996;
-  background: #999;
+  background: #7D7C7C;
   width: 40px;
   height: 40px;
   border-radius: 4px;
@@ -186,13 +188,13 @@ p {
 
 .back-to-top i {
   font-size: 28px;
-  color: #fff;
+  color: #F1EFEF;
   line-height: 0;
 }
 
 .back-to-top:hover {
-  background: #212529;
-  color: #fff;
+  background: #191717;
+  color: #F1EFEF;
 }
 
 .back-to-top.active {
@@ -204,11 +206,13 @@ p {
 # Header
 --------------------------------------------------------------*/
 #header {
-  transition: all 0.5s;
+
   z-index: 997;
   padding: 15px 0;
-  background-color: #fff;
+  background-color: #F1EFEF;
   box-shadow: 0px 2px 25px rgba(0, 0, 0, 0.08);
+  position: fixed;
+  top: 0;
 }
 
 .header-homepage{
@@ -227,12 +231,12 @@ p {
   line-height: 1;
   font-weight: 600;
   letter-spacing: 1px;
-  font-family: "Playfair Display", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-style: italic;
 }
 
 #header .logo a {
-  color: #898989;
+  color: #7D7C7C;
 }
 
 #header .logo img {
@@ -253,6 +257,7 @@ p {
 */
 .navbar {
   padding: 0;
+  top: 0;
 }
 
 .navbar ul {
@@ -274,7 +279,7 @@ p {
   font-family: "Poppins", sans-serif;
   font-size: 14px;
   font-weight: 500;
-  color: #8F8F8F;
+  color: #7D7C7C;
   white-space: nowrap;
   transition: 0.3s;
 }
@@ -290,7 +295,7 @@ p {
 .navbar .active,
 .navbar .active:focus,
 .navbar li:hover>a {
-  color: #0a0a0a;
+  color: #191717;
 }
 
 .navbar .dropdown ul {
@@ -301,9 +306,9 @@ p {
   margin: 0;
   padding: 10px 0;
   z-index: 99;
-  opacity: 0;
+  opacity: 1;
   visibility: hidden;
-  background: #fff;
+  background: #F1EFEF;
   box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
   transition: 0.3s;
 }
@@ -324,7 +329,7 @@ p {
 .navbar .dropdown ul a:hover,
 .navbar .dropdown ul .active:hover,
 .navbar .dropdown ul li:hover>a {
-  color: #b8a07e;
+  color: #CCC8AA;
 }
 
 .navbar .dropdown:hover>ul {
@@ -360,7 +365,7 @@ p {
 * Mobile Navigation 
 */
 .mobile-nav-toggle {
-  color: #4b4a4a;
+  color: #7D7C7C;
   font-size: 28px;
   cursor: pointer;
   display: none;
@@ -369,7 +374,7 @@ p {
 }
 
 .mobile-nav-toggle.bi-x {
-  color: #fff;
+  color: #F1EFEF;
 }
 
 @media (max-width: 991px) {
@@ -408,7 +413,7 @@ p {
   left: 15px;
   padding: 10px 0;
   border-radius: 10px;
-  background-color: #fff;
+  background-color: #F1EFEF;
   overflow-y: auto;
   transition: 0.3s;
 }
@@ -417,13 +422,13 @@ p {
 .navbar-mobile a:focus {
   padding: 10px 20px;
   font-size: 15px;
-  color: #4b4a4a;
+  color: #7D7C7C;
 }
 
 .navbar-mobile a:hover,
 .navbar-mobile .active,
 .navbar-mobile li:hover>a {
-  color: #b8a07e;
+  color: #CCC8AA;
 }
 
 .navbar-mobile .getstarted,
@@ -439,7 +444,7 @@ p {
   z-index: 99;
   opacity: 1;
   visibility: visible;
-  background: #fff;
+  background: #F1EFEF;
   box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
 }
 
@@ -458,7 +463,7 @@ p {
 .navbar-mobile .dropdown ul a:hover,
 .navbar-mobile .dropdown ul .active:hover,
 .navbar-mobile .dropdown ul li:hover>a {
-  color: #b8a07e;
+  color: #CCC8AA;
 }
 
 .navbar-mobile .dropdown>.dropdown-active {
@@ -472,6 +477,8 @@ p {
   background: url("../img/full body.png") repeat scroll center center/cover;
   height: 100vh;
   width: 100%;
+  margin-top: 40px;
+  margin-bottom: 0;
 }
 
 #hero .hero-content {
@@ -481,35 +488,57 @@ p {
   display: flex;
   justify-content: center;
   flex-direction: column;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 .hero-content h1 {
   font-size: 40px;
   font-weight: 700;
-  margin-bottom: 10px;
+
   text-transform: uppercase;
-  color: #fff;
+  color: #191717;
 }
 
 .hero-content p {
-  font-size: 13px;
+  font-size: 15px;
   letter-spacing: 3px;
   margin-top: 0;
   margin-bottom: 30px;
-  text-transform: capitalize;
-  color: #fff;
+  color: #191717;
   font-weight: 500;
+  text-align: justify;
 }
 
 .hero-content .list-social li {
   float: left;
   margin-right: 20px;
+  display: flex;
+  align-items: center;
 }
 
 .hero-content .list-social li i {
-  color: #fff;
+  color: #F1EFEF;
   font-size: 15px;
 }
+
+.list-social li i:hover{
+    color: #7D7C7C;
+}
+
+.list-social li {
+  float: left;
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.hero-text {
+  max-width: 50%; /* Set a maximum width to limit the content to the left half of the page */
+
+
+}
+
 
 /*--------------------------------------------------------------
 # Breadcrumbs
@@ -554,7 +583,7 @@ p {
 .breadcrumbs ol li+li::before {
   display: inline-block;
   padding-right: 10px;
-  color: #6c757d;
+  color: #7D7C7C;
   content: "/";
 }
 
@@ -578,13 +607,13 @@ p {
 #about {
   width: 100%;
   height: auto;
-  background: #0a0a0a;
+  background: #191717;
   padding-top: 120px;
 }
 
 #about .div-img-bg {
   padding-bottom: 30px;
-  border: 20px solid #8F8F8F;
+  border: 20px solid #7D7C7C;
 }
 
 #about .div-img-bg .about-img img {
@@ -598,7 +627,7 @@ p {
 }
 
 #about .about-descr .p-heading {
-  font-family: "Playfair Display", serif;
+  font-family: "Poppins", sans-serif;
   font-size: 28px;
   text-align: left;
 }
@@ -610,20 +639,21 @@ p {
 }
 
 /*--------------------------------------------------------------
-# Services
+# Skills
 --------------------------------------------------------------*/
 #services {
-  background: #f7f7f7;
+  background: #F1EFEF;
   position: relative;
   padding-bottom: 80px;
   padding-top: 40px;
+  margin-top: 0;
 }
 
 .services-block span {
   margin: 10px 0;
   position: relative;
   font-size: 13px;
-  color: #292929;
+  color: #191717;
   letter-spacing: 0.1em;
   font-weight: 500;
   text-transform: uppercase;
@@ -638,7 +668,7 @@ p {
 
 .services-block i {
   font-size: 44px;
-  color: #292929;
+  color: #191717;
   line-height: 44px;
 }
 
@@ -650,13 +680,13 @@ p {
 .services-slider .swiper-pagination .swiper-pagination-bullet {
   width: 12px;
   height: 12px;
-  background-color: #fff;
+  background-color: #F1EFEF;
   opacity: 1;
-  border: 1px solid #292929;
+  border: 1px solid #191717;
 }
 
 .services-slider .swiper-pagination .swiper-pagination-bullet-active {
-  background-color: #292929;
+  background-color: #191717;
 }
 
 /*--------------------------------------------------------------
@@ -665,6 +695,9 @@ p {
 #portfolio {
   position: relative;
   padding-bottom: 50px;
+  background: #7D7C7C;
+  color: #191717;
+
 }
 
 #portfolio #portfolio-flters {
@@ -674,6 +707,7 @@ p {
   text-align: center;
   border-radius: 50px;
   padding: 2px 15px;
+  background: #F1EFEF;
 }
 
 #portfolio #portfolio-flters li {
@@ -684,14 +718,15 @@ p {
   font-weight: 600;
   line-height: 1;
   text-transform: uppercase;
-  color: #999999;
+  color: #7D7C7C;
   margin-bottom: 5px;
   transition: all 0.3s ease-in-out;
+  background: #F1EFEF;
 }
 
 #portfolio #portfolio-flters li:hover,
 #portfolio #portfolio-flters li.filter-active {
-  color: #212529;
+  color: #191717;
 }
 
 #portfolio #portfolio-flters li:last-child {
@@ -700,6 +735,7 @@ p {
 
 #portfolio .portfolio-item {
   margin-bottom: 30px;
+  color: #191717;
 }
 
 #portfolio .portfolio-item .portfolio-info {
@@ -716,13 +752,13 @@ p {
 
 #portfolio .portfolio-item .portfolio-info h4 {
   font-size: 18px;
-  color: #666;
+  color: #191717;
   font-weight: 600;
   margin-bottom: 10px;
 }
 
 #portfolio .portfolio-item .portfolio-info p {
-  color: #999;
+  color: #7D7C7C;
   font-size: 14px;
   margin: 0;
   padding: 0;
@@ -734,12 +770,12 @@ p {
   right: 40px;
   font-size: 24px;
   top: calc(50% - 18px);
-  color: #b8a07e;
+  color: #CCC8AA;
 }
 
 #portfolio .portfolio-item .portfolio-info .preview-link:hover,
 #portfolio .portfolio-item .portfolio-info .details-link:hover {
-  color: #cab89f;
+  color: #CCC8AA;
 }
 
 #portfolio .portfolio-item .portfolio-info .details-link {
@@ -751,85 +787,38 @@ p {
   bottom: 20px;
 }
 
-/*--------------------------------------------------------------
-# Portfolio Details
---------------------------------------------------------------*/
-.portfolio-details {
-  padding-top: 40px;
+#portfolio h2{
+    color: #F1EFEF;
 }
 
-.portfolio-details .portfolio-details-slider img {
-  width: 100%;
+.portfolio-card{
+    background: #F1EFEF;
+    color: #191717;
 }
 
-.portfolio-details .portfolio-details-slider .swiper-pagination {
-  margin-top: 20px;
-  position: relative;
+.card-text{
+    height: 200px;
+
+
 }
 
-.portfolio-details .portfolio-details-slider .swiper-pagination .swiper-pagination-bullet {
-  width: 12px;
-  height: 12px;
-  background-color: #fff;
-  opacity: 1;
-  border: 1px solid #b8a07e;
-}
 
-.portfolio-details .portfolio-details-slider .swiper-pagination .swiper-pagination-bullet-active {
-  background-color: #b8a07e;
-}
 
-.portfolio-details .portfolio-info {
-  padding: 30px;
-  box-shadow: 0px 0 30px rgba(75, 74, 74, 0.08);
-}
-
-.portfolio-details .portfolio-info h3 {
-  font-size: 22px;
-  font-weight: 700;
-  margin-bottom: 20px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid #eee;
-}
-
-.portfolio-details .portfolio-info ul {
-  list-style: none;
-  padding: 0;
-  font-size: 15px;
-}
-
-.portfolio-details .portfolio-info ul li+li {
-  margin-top: 10px;
-}
-
-.portfolio-details .portfolio-description {
-  padding-top: 30px;
-}
-
-.portfolio-details .portfolio-description h2 {
-  font-size: 26px;
-  font-weight: 700;
-  margin-bottom: 20px;
-}
-
-.portfolio-details .portfolio-description p {
-  padding: 0;
-}
 
 /*--------------------------------------------------------------
-# Journal
+# Musings
 --------------------------------------------------------------*/
 #journal,
 #journal-blog {
   height: auto;
   width: 100%;
-  background: #f7f7f7;
+  background: #F1EFEF;
   padding-bottom: 60px;
   position: relative;
 }
 
 #journal-blog {
-  background: #fff;
+  background: #F1EFEF;
   padding-bottom: 30px;
 }
 
@@ -858,12 +847,12 @@ p {
   line-height: 24px;
   margin: 0 0 13px 0;
   font-weight: 500;
-  color: #292929;
+  color: #191717;
   transition: all 0.5s ease-in-out 0s;
 }
 
 .journal-block .journal-info .journal-txt h4 a:hover {
-  color: #b8a07e;
+  color: #7D7C7C;
   transition: all 0.5s ease-in-out 0s;
 }
 
@@ -883,15 +872,45 @@ p {
     width: 100%;
     border-radius: 10px;
 }
-/*--------------------------------------------------------------
-# Journal
---------------------------------------------------------------*/
 
+.blog-img{
+    height: 200px;
+    width: 100%
+}
+
+#blog{
+    background: #F1EFEF;
+    width: 100%;  /* Set the width to 100% of the viewport width */
+    padding-top: 80px;
+    padding-bottom: 100px;
+
+}
+
+#edit-btn{
+    background: #474A56;
+}
+
+#delete-btn{
+    background: #FF0000;
+}
+
+#submit{
+    width: 200px;
+}
+/*--------------------------------------------------------------
+# Contact
+--------------------------------------------------------------*/
+#contact{
+    background: #CCC8AA;
+
+
+}
 
 .contact-details {
   list-style: none;
   margin: 0;
   padding: 0;
+  color: #191717;
 }
 
 .contact-details li {
@@ -910,7 +929,7 @@ p {
 
 .php-email-form .error-message {
   display: none;
-  color: #fff;
+  color: #F1EFEF;
   background: #ed3c0d;
   text-align: left;
   padding: 15px;
@@ -924,7 +943,7 @@ p {
 
 .php-email-form .sent-message {
   display: none;
-  color: #fff;
+  color: #F1EFEF;
   background: #18d26e;
   text-align: center;
   padding: 15px;
@@ -934,7 +953,7 @@ p {
 
 .php-email-form .loading {
   display: none;
-  background: #fff;
+  background: #F1EFEF;
   text-align: center;
   padding: 15px;
   margin-bottom: 15px;
@@ -947,8 +966,8 @@ p {
   width: 24px;
   height: 24px;
   margin: 0 10px -6px 0;
-  border: 3px solid #18d26e;
-  border-top-color: #eee;
+  border: 3px solid #CCC8AA;
+  border-top-color: #CCC8AA;
   animation: animate-loading 1s linear infinite;
 }
 
@@ -980,7 +999,7 @@ p {
 
 /* main content */
 .main-content {
-  background: #f7f7f7;
+  background: #F1EFEF;
 }
 
 .main-content .container-main {
@@ -994,7 +1013,7 @@ p {
 }
 
 .container-main .block-main .content-main {
-  background: #fff none repeat scroll 0 0;
+  background: #F1EFEF none repeat scroll 0 0;
   display: inline-block;
   width: 100%;
 }
@@ -1005,12 +1024,12 @@ p {
   line-height: 24px;
   margin: 0 0 13px 0;
   font-weight: 500;
-  color: #292929;
+  color: #191717;
   transition: all 0.5s ease-in-out 0s;
 }
 
 .journal-txt h4 a:hover {
-  color: #b8a07e;
+  color: #CCC8AA;
   transition: all 0.5s ease-in-out 0s;
 }
 
@@ -1025,13 +1044,13 @@ p {
 }
 
 .content-main .post-meta a {
-  color: #a2a2a2;
+  color: #7D7C7C;
   margin-left: 5px;
 }
 
 /* Commonts */
 .comments {
-  background: #fff;
+  background: #F1EFEF;
 }
 
 .entry-comments h6 {
@@ -1044,7 +1063,7 @@ p {
 .entry-comments-item {
   margin-top: 40px;
   padding-bottom: 40px;
-  border-bottom: 1px solid #f2f2f2;
+  border-bottom: 1px solid #F1EFEF;
 }
 
 .entry-comments-avatar {
@@ -1062,14 +1081,14 @@ p {
 .entry-comments-author {
   margin-right: 10px;
   font-size: 13px;
-  color: #292929;
+  color: #191717;
   letter-spacing: 0.1em;
   font-weight: 500;
 }
 
 .rep {
   font-size: 13px;
-  color: #292929;
+  color: #191717;
   letter-spacing: 0.1em;
   font-weight: 500;
   text-transform: capitalize;
@@ -1077,7 +1096,7 @@ p {
 
 .entry-comments span a {
   font-size: 13px;
-  color: #999;
+  color: #7D7C7C;
 }
 
 .entry-comments-reply {
@@ -1086,25 +1105,30 @@ p {
 
 /* Commonts form */
 .cmt {
-  background: #fff;
+  background: #F1EFEF;
 }
 
 blockquote {
   padding: 40px;
-  background-color: #f2f2f2;
+  background-color: #F1EFEF;
   margin: 30px 0;
   border: none;
-  border-left: 4px solid #b8a07e;
+  border-left: 4px solid #CCC8AA;
 }
 
 /*--------------------------------------------------------------
 # Footer
 --------------------------------------------------------------*/
 #footer {
-  background: #f7f7f7;
+  background: #F1EFEF;
   padding-bottom: 50px;
-  padding-top: 30px
-  margin-top: 20px;
+
+
+}
+
+.footer-container{
+    width: 100%;
+
 }
 
 #footer .socials-media {
@@ -1125,7 +1149,7 @@ blockquote {
 
 #footer .socials-media ul li a {
   font-size: 24px;
-  color: #999;
+  color: #7D7C7C;
   letter-spacing: 0.1em;
   font-weight: 500;
   background: transparent;
@@ -1134,7 +1158,7 @@ blockquote {
 }
 
 #footer .socials-media ul li a:hover {
-  color: #b8a07e;
+  color: #CCC8AA;
   transition: all 0.5s ease-in-out 0s;
 }
 
@@ -1147,10 +1171,6 @@ blockquote {
   text-transform: uppercase;
 }
 
-.footer-container{
-    margin: 20px;
-    padding: 20px;
-}
 
 .credits {
   font-size: 13px;
@@ -1183,7 +1203,7 @@ blockquote {
     float: none;
     width: 100%;
     text-align: center;
-    border-top: 1px solid #f7f7f7;
+    border-top: 1px solid #F1EFEF;
     line-height: 45px;
     margin-left: 0;
     padding-top: 10px;
@@ -1226,6 +1246,7 @@ blockquote {
     float: none;
     margin: 20px;
     display: inline-block;
+
   }
 
   /* journal */
@@ -1268,7 +1289,7 @@ blockquote {
     float: none;
     width: 100%;
     text-align: center;
-    border-top: 1px solid #f7f7f7;
+    border-top: 1px solid #F1EFEF;
     line-height: 45px;
     margin-left: 0;
     padding-top: 10px;
@@ -1351,7 +1372,7 @@ blockquote {
     float: none;
     width: 100%;
     text-align: center;
-    border-top: 1px solid #f7f7f7;
+    border-top: 1px solid #F1EFEF;
     line-height: 45px;
     margin-left: 0;
     padding-top: 10px;
@@ -1419,6 +1440,10 @@ blockquote {
   }
 }
 
+#footer{
+    padding-top: 20px;
+}
+
 /** Width between 480px to 0
  *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
@@ -1440,7 +1465,7 @@ blockquote {
     float: none;
     width: 100%;
     text-align: center;
-    border-top: 1px solid #f7f7f7;
+    border-top: 1px solid #F1EFEF;
     line-height: 45px;
     margin-left: 0;
     padding-top: 10px;
@@ -1522,7 +1547,7 @@ blockquote {
     float: none;
     width: 100%;
     text-align: center;
-    border-top: 1px solid #f7f7f7;
+    border-top: 1px solid #F1EFEF;
     line-height: 45px;
     margin-left: 0;
     padding-top: 10px;
@@ -1607,5 +1632,5 @@ blockquote {
 /* Blog-post Page */
 
 #post-title{
-    color: #0a0a0a;
+    color: #191717;
 }

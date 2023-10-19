@@ -14,10 +14,16 @@
       <nav id="navbar" class="navbar header-homepage">
         <ul>
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">About</a></li>
+          <li><a class="nav-link scrollto" href="#services">Skills</a></li>
           <li><a class="nav-link  scrollto" href="#portfolio">Portfolio</a></li>
-          <li><a class="nav-link  scrollto" href="#journal">Blog</a></li>
+          <li><a class="nav-link  scrollto" href="#blog">Blog</a></li>
           <li><a class="nav-link" href="#contact">Contact</a></li>
+           {% if not current_user.is_authenticated: %}
+          <li><a class="nav-link" href="{{url_for('login')}}">Login</a></li>
+          {% else %}
+          <li><a class="nav-link" href="{{url_for('logout')}}">Logout</a></li>
+          {% endif %}
+
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -35,54 +41,29 @@
 
     <div class="container">
       <div class="hero-content">
-        <h1>Keiran Devine </h1>
-        <p>Web Developer, App Developer, Data Analyst</p>
+        <div class="hero-text">
+          <h1>Keiran Devine </h1>
+          <h2 class="animate__animated animate__fadeInLeft">Web Developer, App Developer, Data Analyst</h2>
+          <br>
+          <p>Welcome to my digital showcase. I'm a computer programmer with a passion software development, web development, and computer science in
+            general.<br><br>On this page I aim to share my skills, my work and a little about myself as a person. Explore, learn about my professional
+            path and feel free to get in touch via the contact form!
+        </div>
 
-        <ul class="list-unstyled list-social">
-          <li><a href="https://www.facebook.com/keiran.devine"><i class="bi bi-facebook"></i></a></li>
-          <li><a href="https://www.instagram.com/inglesdoirlandes/"><i class="bi bi-instagram"></i></a></li>
-          <li><a href="https://www.linkedin.com/in/keiran-devine-1ba373274/"><i class="bi bi-linkedin"></i></a></li>
-        </ul>
+
       </div>
     </div>
   </div><!-- End Hero -->
 
   <main id="main">
 
-    <!-- ======= About Section ======= -->
-    <div id="about" class="paddsection">
-      <div class="container">
-        <div class="row justify-content-between">
-
-          <div class="col-lg-4">
-            <div class="div-img-bg">
-              <div class="about-img">
-                <img src="static/assets/img/close up.png" class="img-responsive" alt="me">
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-6">
-            <div class="about-descr">
-
-              <h1 class="p-heading">In a Nutshell </h1>
-              <br>
-              <h5 class="separator">Since starting to study computer science in January 2023, my skills have been going from strength to strength. After
-              starting out with text based apps, I quickly moved on to learn about other areas, like GUIs, Web development, Web scraping, APIs,
-                user authentication among many more. <br><br> Currently working on Python, Java and AWS accreditation </h5>
-            </div>
 
 
-          </div>
-        </div>
-      </div>
-    </div><!-- End About Section -->
-
-    <!-- ======= Services Section ======= -->
+    <!-- ======= Skills Section ======= -->
     <div id="services">
       <div class="container">
 
-        <div class="services-slider swiper" data-aos="fade-up" data-aos-delay="100">
+        <div class="services-slider swiper" >
           <div class="swiper-wrapper">
 
             <div class="swiper-slide">
@@ -91,7 +72,7 @@
                 <span>UI/UX DESIGN</span>
                 <p class="separator">Designing user experiences for intuitive and delightful interactions.</p>
               </div>
-            </div><!-- End testimonial item -->
+            </div><!-- End skills item -->
 
             <div class="swiper-slide">
               <div class="services-block">
@@ -99,7 +80,7 @@
                 <span>Cloud</span>
                 <p class="separator">Delivering scalable and on-demand computing resources via the internet.</p>
               </div>
-            </div><!-- End testimonial item -->
+            </div><!-- End skills item -->
 
             <div class="swiper-slide">
               <div class="services-block">
@@ -107,7 +88,7 @@
                 <span>WEBSITE BUILDING</span>
                 <p class="separator">Creating visually appealing and functional websites for online presence. </p>
               </div>
-            </div><!-- End testimonial item -->
+            </div><!-- End skills item -->
 
             <div class="swiper-slide">
               <div class="services-block">
@@ -115,7 +96,7 @@
                 <span>MOBILE APPS</span>
                 <p class="separator">Crafting seamless and engaging experiences for mobile device users. </p>
               </div>
-            </div><!-- End testimonial item -->
+            </div><!-- End skills item -->
 
             <div class="swiper-slide">
               <div class="services-block">
@@ -123,7 +104,7 @@
                 <span>Analytics</span>
                 <p class="separator">Extracting insights from data to drive informed decision-making. </p>
               </div>
-            </div><!-- End testimonial item -->
+            </div><!-- End skills item -->
 
             <div class="swiper-slide">
               <div class="services-block">
@@ -131,7 +112,7 @@
                 <span>APIs</span>
                 <p class="separator">Developing standardized interfaces for seamless software integration and communication.</p>
               </div>
-            </div><!-- End testimonial item -->
+            </div><!-- End skills item -->
 
           </div>
           <div class="swiper-pagination"></div>
@@ -139,57 +120,60 @@
 
       </div>
 
-    </div><!-- End Services Section -->
+    </div><!-- End Skills Section -->
 
     <!-- ======= Portfolio Section ======= -->
     <div id="portfolio" class="paddsection">
+  <div class="container">
+    <div class="section-title text-center">
+      <h2 id="portfolio-title">My Portfolio</h2>
+    </div>
+  </div>
 
-      <div class="container">
-        <div class="section-title text-center">
-          <h2>My Portfolio</h2>
-        </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 d-flex justify-content-center">
+        <ul id="portfolio-flters">
+          <li data-filter="*" class="filter-active">All</li>
+          <li data-filter=".filter-app">App</li>
+          <li data-filter=".filter-game">Game</li>
+          <li data-filter=".filter-web">Web</li>
+        </ul>
       </div>
+    </div>
 
-      <div class="container">
+    <div class="row portfolio-container">
+      {% for project in projects %}
+      <div class="col-md-4 portfolio-item filter-{{project.category.lower()}}">
+        <div class="card portfolio-card">
 
-        <div class="row">
-          <div class="col-lg-12 d-flex justify-content-center">
-            <ul id="portfolio-flters">
-              <li data-filter="*" class="filter-active">All</li>
-              <li data-filter=".filter-app">App</li>
-              <li data-filter=".filter-game">Game</li>
-              <li data-filter=".filter-web">Web</li>
-            </ul>
+          <div class="card-body">
+              <div class="card-text">
+                <h5 class="card-title">{{project.name}}</h5>
+                <p class="card-text">{{project.description}}</p>
+              </div>
+              <div>
+                <a href="{{project.git_url}}" class="btn btn-primary embedded-btn">GitHub</a>
+              </div>
+
           </div>
         </div>
+      </div>
+      {% endfor %}
+    </div>
 
-      <div class="row portfolio-container">
-       {% for project in projects %}
-      <div class="col-md-4 portfolio-item filter-{{project.category.lower()}}" >
-        <div class="card">
-  <img src="{{project.img_url}}" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">{{project.name}}</h5>
-    <p class="card-text">{{project.description}}</p>
-    <a href="{{project.git_url}}" class="btn btn-primary embedded-btn">GitHub</a>
+    {% if current_user.is_authenticated %}
+    <a href="{{url_for('add_new_project')}}" class="btn btn-primary new-blog-btn">Add New Project</a>
+    {% endif %}
   </div>
 </div>
-      </div>
-
-      {% endfor %}
-
-      </div>
-      <a href="{{url_for('add_new_project')}}" class="btn btn-primary new-blog-btn">Add New Project</a>
-        </div>
 
 
 
-      </div>
+   <!-- End Portfolio Section -->
 
-    </div><!-- End Portfolio Section -->
-
-    <!-- ======= Journal Section ======= -->
-    <div id="journal" class="text-left paddsection">
+    <!-- ======= Musings Section ======= -->
+    <div id="blog" class="text-left paddsection">
 
       <div class="container">
         <div class="section-title text-center">
@@ -206,23 +190,34 @@
 
             <div class="col-lg-4 col-md-6">
               <div class="journal-info">
-                <a href="{{ url_for('get_post', blog_id=post.id) }}"><img src="{{post.img_url}}" class="img-responsive" alt="img"></a>
+                <a href="{{ url_for('get_post', blog_id=post.id) }}"><img src="{{post.img_url}}" class="img-responsive blog-img" alt="img"></a>
                 <div class="journal-txt">
                   <h4><a href="{{ url_for('get_post', blog_id=post.id) }}">{{post.title}}</a></h4>
                   <p class="separator">{{post.subtitle}}
                   </p>
 
                 </div>
-                    <a href="{{url_for('delete_blog_post', index=post.id)}}" class="btn btn-primary embedded-btn">Delete</a>
-                    <a class="btn btn-primary embedded-btn float-right" href="{{url_for('edit_post', post_id=post.id)}}" >Edit</a>
+                    <a href="{{ url_for('get_post', blog_id=post.id) }}" class="btn btn-primary embedded-btn">Read</a>
+                 {% if current_user.is_authenticated %}
+                    <a class="btn btn-primary embedded-btn float-right" id="edit-btn" href="{{url_for('edit_post', post_id=post.id)}}" >Edit</a>
+                    <a href="{{url_for('delete_blog_post', index=post.id)}}" id="delete-btn" class="btn btn-primary embedded-btn">Delete</a>
+
+                {% endif %}
               </div>
+
             </div>
             {% endfor %}
           </div>
+
         </div>
         <br>
+         {% if current_user.is_authenticated: %}
         <a href="{{url_for('create_new_post')}}" class="btn btn-primary new-blog-btn">New Blog Post</a>
+
+         {% endif %}
       </div>
+    </div>
+      <!-- End Musings Section -->
 
     <!-- ======= Contact Section ======= -->
     <div id="contact" class="paddsection">
@@ -242,8 +237,22 @@
                   <li><span>teacherkeiran@gmail.com</span></li>
                 </ul>
 
+
+                <ul class="list-unstyled list-social">
+                  <li><a href="https://www.facebook.com/keiran.devine"><i class="bi bi-facebook"></i></a></li>
+                  <li><a href="https://www.instagram.com/inglesdoirlandes/"><i class="bi bi-instagram"></i></a></li>
+                  <li><a href="https://www.linkedin.com/in/keiran-devine-1ba373274/"><i class="bi bi-linkedin"></i></a></li>
+                </ul>
+
               </div>
+
+
+
             </div>
+
+
+
+
 
             <div class="col-lg-6">
               <form id="contact form" name="sentMessage" action="{{ url_for('get_contact_info') }}" method="POST" novalidate>
@@ -284,6 +293,7 @@
           </div>
         </div>
       </div>
+
     </div><!-- End Contact Section -->
 
   </main><!-- End #main -->
