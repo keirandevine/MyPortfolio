@@ -70,13 +70,12 @@ class PortfolioItem(db.Model):
     name = db.Column(db.String(100), unique=True, nullable=False)
     category = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(250), nullable=False)
-    img_url = db.Column(db.String(250), nullable=False)
     git_url = db.Column(db.String(250), nullable=False)
 
 
 
-# with app.app_context():
-#     db.create_all()
+with app.app_context():
+    db.create_all()
 #___________________________________________Creat WTF Form_________________________________________________________#
 
 class CreatePostForm(FlaskForm):
@@ -91,7 +90,6 @@ class AddProjectForm(FlaskForm):
     name = StringField("Project Name", validators=[DataRequired()])
     category = SelectField('Category', coerce=str, choices=["App", "Game", "Web"], validators=[DataRequired()])
     description = StringField("Description", validators=[DataRequired()])
-    img_url = StringField("Project Image URL", validators=[DataRequired(), URL()])
     git_url = StringField("GitHub Link", validators=[DataRequired(), URL()])
     submit = SubmitField("Submit Project")
 
@@ -103,12 +101,20 @@ class LoginForm(FlaskForm):
 #_________________________________________Definition of Functions____________________________________________#
 
 def send_email(name, email, subject, message):
-    email_message = f"Subject: New Message\n\nName: {name}\nEmail: {email}\nSubject: {subject}\nMessage: {message}"
-    with smtplib.SMTP('smtp.gmail.com') as connection:
-        connection.starttls()
-        connection.login(user=MY_EMAIL, password=MY_PASSWORD)
-        connection.sendmail(from_addr=MY_EMAIL, to_addrs=email, msg=email_message)
-        connection.close()
+    try:
+        email_message = f"Subject: New Message\n\nName: {name}\nEmail: {email}\nSubject: {subject}\nMessage: {message}"
+        with smtplib.SMTP('smtp.gmail.com') as connection:
+            connection.starttls()
+            connection.login(user=MY_EMAIL, password=MY_PASSWORD)
+            connection.sendmail(from_addr=MY_EMAIL, to_addrs=email, msg=email_message)
+            connection.close()
+            return True
+    except smtplib.SMTPException as e:
+        # Handle SMTP errors here
+        print("SMTP error:", e)
+        return False
+    except:
+        return False
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -127,9 +133,8 @@ def home():
         salt_length=8
     )
     print(pw)
-
-
-    return render_template('index.html', posts=recent_posts, projects=portfolio_projects)
+    return render_template('index.html', posts=recent_posts, projects=portfolio_projects, success=request.args.get('success'),
+                           scroll=request.args.get('scroll'))
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
@@ -227,13 +232,11 @@ def add_new_project():
         name = form.name.data
         category = form.category.data
         description = form.description.data
-        img_url = form.img_url.data
         git_url = form.git_url.data
         new_project = PortfolioItem(
             name=name,
             category=category,
             description=description,
-            img_url=img_url,
             git_url=git_url,
         )
         db.session.add(new_project)
@@ -241,15 +244,50 @@ def add_new_project():
         return redirect(url_for('home'))
     return render_template('add-project.html', form=form)
 
+@app.route('/edit-project/<int:project_id>', methods=['GET', 'POST'])
+def edit_project(project_id):
+    project_to_edit = PortfolioItem.query.get(project_id)
+    edit_form = AddProjectForm(
+        name=project_to_edit.name,
+        category=project_to_edit.category,
+        description=project_to_edit.description,
+        git_url=project_to_edit.git_url,
+    )
+    if request.method =='POST':
+        project_to_edit.name = edit_form.name.data
+        project_to_edit.category = edit_form.category.data
+        project_to_edit.description = edit_form.description.data
+        project_to_edit.git_url = edit_form.git_url.data
+        db.session.commit()
+        return redirect(url_for('home'))
+
+    return render_template('make-post.html', id=project_id, form=edit_form)
+
+@app.route('/delete-project')
+def delete_project():
+    project_id = request.args.get('index')
+    project_to_delete = PortfolioItem.query.get(project_id)
+    db.session.delete(project_to_delete)
+    db.session.commit()
+    return redirect(url_for('home'))
+
 @app.route('/contact', methods=['GET', 'POST'])
 def get_contact_info():
     name = request.form['name']
     email = request.form['email']
     subject = request.form['subject']
     message = request.form['message']
-    print(name, email, subject, message)
-    send_email(name, email, subject, message)
-    return render_template('index.html')
+    email_sent = send_email(name, email, subject, message)
+    if email_sent:
+        print('email has been sent')
+        return redirect(url_for('home', success=True, scroll='contact'))
+    else:
+        print('email has not been sent')
+
+        return render_template('email-error.html')
+
+
+
 
 
 

@@ -45,7 +45,7 @@
           <h1>Keiran Devine </h1>
           <h2 class="animate__animated animate__fadeInLeft">Web Developer, App Developer, Data Analyst</h2>
           <br>
-          <p>Welcome to my digital showcase. I'm a computer programmer with a passion software development, web development, and computer science in
+          <p>Welcome to my digital showcase. I'm a computer programmer with a passion for software development, web development, and computer science in
             general.<br><br>On this page I aim to share my skills, my work and a little about myself as a person. Explore, learn about my professional
             path and feel free to get in touch via the contact form!
         </div>
@@ -68,7 +68,7 @@
 
             <div class="swiper-slide">
               <div class="services-block">
-                <i class="bi bi-laptop"></i>
+                <i class="bi bi-laptop skills-icon"></i>
                 <span>UI/UX DESIGN</span>
                 <p class="separator">Designing user experiences for intuitive and delightful interactions.</p>
               </div>
@@ -76,7 +76,7 @@
 
             <div class="swiper-slide">
               <div class="services-block">
-                <i class="bi bi-cloud"></i>
+                <i class="bi bi-cloud skills-icon"></i>
                 <span>Cloud</span>
                 <p class="separator">Delivering scalable and on-demand computing resources via the internet.</p>
               </div>
@@ -84,7 +84,7 @@
 
             <div class="swiper-slide">
               <div class="services-block">
-                <i class="bi bi-bricks"></i>
+                <i class="bi bi-bricks skills-icon"></i>
                 <span>WEBSITE BUILDING</span>
                 <p class="separator">Creating visually appealing and functional websites for online presence. </p>
               </div>
@@ -92,7 +92,7 @@
 
             <div class="swiper-slide">
               <div class="services-block">
-                <i class="bi bi-phone"></i>
+                <i class="bi bi-phone skills-icon"></i>
                 <span>MOBILE APPS</span>
                 <p class="separator">Crafting seamless and engaging experiences for mobile device users. </p>
               </div>
@@ -100,7 +100,7 @@
 
             <div class="swiper-slide">
               <div class="services-block">
-                <i class="bi bi-bar-chart"></i>
+                <i class="bi bi-bar-chart skills-icon"></i>
                 <span>Analytics</span>
                 <p class="separator">Extracting insights from data to drive informed decision-making. </p>
               </div>
@@ -108,7 +108,7 @@
 
             <div class="swiper-slide">
               <div class="services-block">
-                <i class="bi bi-server"></i>
+                <i class="bi bi-server skills-icon"></i>
                 <span>APIs</span>
                 <p class="separator">Developing standardized interfaces for seamless software integration and communication.</p>
               </div>
@@ -145,15 +145,31 @@
     <div class="row portfolio-container">
       {% for project in projects %}
       <div class="col-md-4 portfolio-item filter-{{project.category.lower()}}">
-        <div class="card portfolio-card">
+        <div class="card portfolio-card card-shadow">
 
           <div class="card-body">
               <div class="card-text">
-                <h5 class="card-title">{{project.name}}</h5>
+                <h5 class="card-title">
+                  {% if project.category.lower() == 'game' %}
+                  <i class="bi bi-controller portfolio-icon"></i>
+                  {% elif project.category.lower() == 'app' %}
+                  <i class="bi bi-app-indicator portfolio-icon"></i>
+                  {% elif project.category.lower() == 'web' %}
+                  <i class="bi bi-globe portfolio-icon"></i>
+                  {% endif %}
+
+                  {{project.name}}</h5>
                 <p class="card-text">{{project.description}}</p>
               </div>
               <div>
-                <a href="{{project.git_url}}" class="btn btn-primary embedded-btn">GitHub</a>
+                <div class="git-btn-container">
+                  <a href="{{project.git_url}}" id="github-btn" class="btn btn-primary embedded-btn"><i class="bi bi-github"></i>See On Github</a>
+                </div>
+                {% if current_user.is_authenticated %}
+                    <a class="btn btn-primary embedded-btn float-right edit-btn"  href="{{url_for('edit_project', project_id=project.id)}}" >Edit</a>
+                    <a href="{{url_for('delete_project', index=project.id)}}"  class="btn btn-primary embedded-btn delete-btn">Delete</a>
+
+                {% endif %}
               </div>
 
           </div>
@@ -163,7 +179,7 @@
     </div>
 
     {% if current_user.is_authenticated %}
-    <a href="{{url_for('add_new_project')}}" class="btn btn-primary new-blog-btn">Add New Project</a>
+    <a href="{{url_for('add_new_project')}}" id="new-project-btn" class="btn btn-primary new-blog-btn">Add New Project</a>
     {% endif %}
   </div>
 </div>
@@ -199,8 +215,8 @@
                 </div>
                     <a href="{{ url_for('get_post', blog_id=post.id) }}" class="btn btn-primary embedded-btn">Read</a>
                  {% if current_user.is_authenticated %}
-                    <a class="btn btn-primary embedded-btn float-right" id="edit-btn" href="{{url_for('edit_post', post_id=post.id)}}" >Edit</a>
-                    <a href="{{url_for('delete_blog_post', index=post.id)}}" id="delete-btn" class="btn btn-primary embedded-btn">Delete</a>
+                    <a class="btn btn-primary embedded-btn float-right edit-btn"  href="{{url_for('edit_post', post_id=post.id)}}" >Edit</a>
+                    <a href="{{url_for('delete_blog_post', index=post.id)}}"  class="btn btn-primary embedded-btn delete-btn">Delete</a>
 
                 {% endif %}
               </div>
@@ -212,7 +228,7 @@
         </div>
         <br>
          {% if current_user.is_authenticated: %}
-        <a href="{{url_for('create_new_post')}}" class="btn btn-primary new-blog-btn">New Blog Post</a>
+        <a href="{{url_for('create_new_post')}}" id="new-blog-btn" class="btn btn-primary new-blog-btn">New Blog Post</a>
 
          {% endif %}
       </div>
@@ -221,6 +237,12 @@
 
     <!-- ======= Contact Section ======= -->
     <div id="contact" class="paddsection">
+      {% if scroll %}
+        <script>
+
+            document.location.hash = '#' + '{{ scroll }}';
+        </script>
+      {% endif %}
       <div class="container">
         <div class="contact-block1">
           <div class="row">
@@ -239,9 +261,9 @@
 
 
                 <ul class="list-unstyled list-social">
-                  <li><a href="https://www.facebook.com/keiran.devine"><i class="bi bi-facebook"></i></a></li>
-                  <li><a href="https://www.instagram.com/inglesdoirlandes/"><i class="bi bi-instagram"></i></a></li>
-                  <li><a href="https://www.linkedin.com/in/keiran-devine-1ba373274/"><i class="bi bi-linkedin"></i></a></li>
+                  <li><a href="https://www.facebook.com/keiran.devine"><i class="bi bi-facebook social-icon"></i></a></li>
+                  <li><a href="https://www.instagram.com/inglesdoirlandes/"><i class="bi bi-instagram social-icon"></i></a></li>
+                  <li><a href="https://www.linkedin.com/in/keiran-devine-1ba373274/"><i class="bi bi-linkedin social-icon"></i></a></li>
                 </ul>
 
               </div>
@@ -255,7 +277,16 @@
 
 
             <div class="col-lg-6">
-              <form id="contact form" name="sentMessage" action="{{ url_for('get_contact_info') }}" method="POST" novalidate>
+              {% if success %}
+              <div class="alert alert-success" role="alert" id="success-message">
+                Your email has been sent successfully
+              </div>
+              <script>
+                // Call the scrollToSuccessMessage function
+                scrollToSuccessMessage();
+              </script>
+              {% endif %}
+              <form id="contact form" name="sentMessage" action="{{url_for('get_contact_info')}}" method="POST" novalidate>
                 <div class="row gy-3">
 
                   <div class="col-lg-6">
@@ -289,6 +320,7 @@
 
                 </div>
               </form>
+
             </div>
           </div>
         </div>
