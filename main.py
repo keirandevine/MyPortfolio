@@ -22,8 +22,8 @@ import datetime
 MY_EMAIL = os.environ['MY_EMAIL']
 MY_PASSWORD = os.environ['MY_PASSWORD']
 
-
-#____________________________________________Creation of Flask App / Datebase___________________________________________________#
+UPLOAD_FOLDER = 'static/assets/img/'
+#____________________________________________Creation of Flask App / Database___________________________________________________#
 
 
 
@@ -36,7 +36,7 @@ app.static_folder = 'static'
 ckeditor = CKEditor(app)
 bootstrap = Bootstrap(app)
 
-
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///posts.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
@@ -64,6 +64,7 @@ class BlogPost(db.Model):
     body = db.Column(db.Text, nullable=False)
     author = db.Column(db.String(250), nullable=False)
     img_url = db.Column(db.String(250), nullable=False)
+
 
 class PortfolioItem(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -133,7 +134,7 @@ def home():
         salt_length=8
     )
     print(pw)
-    return render_template('index.html', posts=recent_posts, projects=portfolio_projects, success=request.args.get('success'),
+    return render_template('index.min.html', posts=recent_posts, projects=portfolio_projects, success=request.args.get('success'),
                            scroll=request.args.get('scroll'))
 
 @app.route("/login", methods=['GET', 'POST'])
@@ -153,7 +154,7 @@ def login():
         else:
             login_user(user)
             return redirect(url_for('home'))
-    return render_template('login.html', form=form, current_user=current_user)
+    return render_template('login.min.html', form=form, current_user=current_user)
 
 @app.route('/logout')
 def logout():
@@ -165,7 +166,7 @@ def logout():
 @app.route('/blog/<int:blog_id>')
 def get_post(blog_id):
     requested_post = BlogPost.query.get(blog_id)
-    return render_template('blog-single.html', post=requested_post, charset='UTF-8')
+    return render_template('blog-single.min.html', post=requested_post, charset='UTF-8')
 
 @app.route('/new-post', methods=['GET', 'POST'])
 def create_new_post():
@@ -187,7 +188,7 @@ def create_new_post():
         db.session.add(new_blog)
         db.session.commit()
         return redirect(url_for('home'))
-    return render_template('make-post.html', form=form)
+    return render_template('make-post.min.html', form=form)
 
 
 @app.route('/edit/<int:post_id>', methods=['GET', 'POST'])
@@ -214,7 +215,7 @@ def edit_post(post_id):
         db.session.commit()
         return redirect(url_for('home'))
 
-    return render_template('make-post.html', id=post_id, form=edit_form)
+    return render_template('make-post.min.html', id=post_id, form=edit_form)
 
 @app.route('/delete-post')
 def delete_blog_post():
@@ -242,7 +243,7 @@ def add_new_project():
         db.session.add(new_project)
         db.session.commit()
         return redirect(url_for('home'))
-    return render_template('add-project.html', form=form)
+    return render_template('add-project.min.html', form=form)
 
 @app.route('/edit-project/<int:project_id>', methods=['GET', 'POST'])
 def edit_project(project_id):
@@ -261,7 +262,7 @@ def edit_project(project_id):
         db.session.commit()
         return redirect(url_for('home'))
 
-    return render_template('make-post.html', id=project_id, form=edit_form)
+    return render_template('make-post.min.html', id=project_id, form=edit_form)
 
 @app.route('/delete-project')
 def delete_project():
@@ -284,7 +285,7 @@ def get_contact_info():
     else:
         print('email has not been sent')
 
-        return render_template('email-error.html')
+        return render_template('email-error.min.html')
 
 
 
